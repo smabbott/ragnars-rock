@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @sound.name
+%p
+  %strong Author:
+  = @sound.author
+%p
+  %strong Location:
+  = @sound.location_id
+= link_to 'Edit', edit_sound_path(@sound)
+|
+\#{link_to 'Back', sounds_path}

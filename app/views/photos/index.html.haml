@@ -1,0 +1,17 @@
+%h1 Listing photos
+%table
+  %thead
+    %tr
+      %th Author
+      %th Location
+      %th{:colspan => "3"}
+  %tbody
+    - @photos.each do |photo|
+      %tr
+        %td= photo.author
+        %td= photo.location_id
+        %td= link_to 'Show', photo
+        %td= link_to 'Edit', edit_photo_path(photo)
+        %td= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Photo', new_photo_path

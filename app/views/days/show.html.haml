@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Date:
+  = @day.date
+%p
+  %strong Path:
+  = @day.path
+= link_to 'Edit', edit_day_path(@day)
+|
+\#{link_to 'Back', days_path}

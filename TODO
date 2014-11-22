@@ -1,0 +1,13 @@
+* google omniauth setup: https://github.com/zquestz/omniauth-google-oauth2
+https://www.digitalocean.com/community/tutorials/how-to-configure-devise-and-omniauth-for-your-rails-application
+* google login (devise)
+* users (devise)
+* file attachment (carrierwave)
+* link to online image
+* batch add photos from google+, facebook or instagram
+* soundcloud integration
+* comments (acts as commentable)
+* auto-detect location by EXIF data
+* everything is public-read. 
+* Can edit one's own content with login
+* admin can edit anything

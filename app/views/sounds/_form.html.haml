@@ -1,0 +1,23 @@
+= form_for(@sound) do |f|
+  - if @sound.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@sound.errors.count, "error")
+        prohibited this sound from being saved:
+      %ul
+        - @sound.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    = f.label :author
+    %br/
+    = f.text_field :author
+  .field
+    = f.label :location_id
+    %br/
+    = f.number_field :location_id
+  .actions
+    = f.submit
