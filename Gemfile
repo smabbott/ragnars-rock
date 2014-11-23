@@ -16,6 +16,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'normalize-rails'
+gem 'carrierwave'
+gem "fog"
+gem "mini_magick"
 
 group :development, :test do
   gem "erb2haml" 

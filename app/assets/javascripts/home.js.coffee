@@ -25,26 +25,26 @@ handleMarkerClick = (e)->
 
 google.maps.event.addDomListener(window, 'load', initialize)
 
-class Sidebar = 
-  constructor ->
-    # reset
+# class Sidebar = 
+#   constructor ->
+#     # reset
 
-  addPhoto: (photo)-> 
-    # render a photo and push object to photos array
+#   addPhoto: (photo)-> 
+#     # render a photo and push object to photos array
 
-  addSound: (sound)-> 
-    # render a photo and push object to photos array
+#   addSound: (sound)-> 
+#     # render a photo and push object to photos array
 
-  clear: ->
-    # remove all sounds and photos
+#   clear: ->
+#     # remove all sounds and photos
 
-  reset: ->
-    # clear
-    # given arrays for photos and sounds fill those arrays
+#   reset: ->
+#     # clear
+#     # given arrays for photos and sounds fill those arrays
 
-class Photo
-  constructor ->
+# class Photo
+#   constructor ->
 
-class Sound
-  constructor ->
+# class Sound
+#   constructor ->
 
