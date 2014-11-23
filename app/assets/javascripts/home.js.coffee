@@ -27,6 +27,7 @@ google.maps.event.addDomListener(window, 'load', initialize)
 
 class Sidebar = 
   constructor ->
+    # reset
 
   addPhoto: (photo)-> 
     # render a photo and push object to photos array
@@ -36,6 +37,10 @@ class Sidebar =
 
   clear: ->
     # remove all sounds and photos
+
+  reset: ->
+    # clear
+    # given arrays for photos and sounds fill those arrays
 
 class Photo
   constructor ->
