@@ -23,7 +23,7 @@ handleMarkerClick = (e)->
   $.get '/locations/' + this.id, (res)->
       # TODO: be more nuanced
       $("#sidebar").empty()
-      $("#sidebar").append("<img src=\"" + photo + "\"/>") for photo in res.photos
+      $("#sidebar").append("<img src=\"" + photo.url + "\"/>") for photo in res.photos
       res.photos
     ,"json"
 
