@@ -11,7 +11,6 @@ initialize = ()->
 
   # Add locations to it
   for location in window.locations
-    console.log location
     marker = new google.maps.Marker
       position: new google.maps.LatLng(parseFloat(location.coordinates[0]), parseFloat(location.coordinates[1]))
       map: window.map
@@ -20,31 +19,36 @@ initialize = ()->
     google.maps.event.addListener marker, 'click', handleMarkerClick
 
 handleMarkerClick = (e)->
-  $.get '/location/' + e.id, (res)->
-    # pass res (data) to sidebar object
+  
+  $.get '/locations/' + this.id, (res)->
+      # TODO: be more nuanced
+      $("#sidebar").empty()
+      $("#sidebar").append("<img src=\"" + photo + "\"/>") for photo in res.photos
+      res.photos
+    ,"json"
 
 google.maps.event.addDomListener(window, 'load', initialize)
 
-class Sidebar = 
-  constructor ->
-    # reset
+# class Sidebar = 
+#   constructor ->
+#     # reset
 
-  addPhoto: (photo)-> 
-    # render a photo and push object to photos array
+#   addPhoto: (photo)-> 
+#     # render a photo and push object to photos array
 
-  addSound: (sound)-> 
-    # render a photo and push object to photos array
+#   addSound: (sound)-> 
+#     # render a photo and push object to photos array
 
-  clear: ->
-    # remove all sounds and photos
+#   clear: ->
+#     # remove all sounds and photos
 
-  reset: ->
-    # clear
-    # given arrays for photos and sounds fill those arrays
+#   reset: ->
+#     # clear
+#     # given arrays for photos and sounds fill those arrays
 
-class Photo
-  constructor ->
+# class Photo
+#   constructor ->
 
-class Sound
-  constructor ->
+# class Sound
+#   constructor ->
 
