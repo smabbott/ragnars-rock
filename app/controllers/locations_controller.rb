@@ -6,9 +6,6 @@ class LocationsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.json { render json: {location: @location, photos:@location.photos, sounds:@location.sounds}}
-    end
   end
 
   def new
