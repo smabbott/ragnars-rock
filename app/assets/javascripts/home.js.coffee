@@ -81,18 +81,29 @@ class Photo
 
   addEventHandlers: =>
     @el.on 'click', 'button', @display
+    @el.on 'mouseover', 'button', @hover
+    @el.on 'mouseout', 'button', @unhover
 
   render: =>
     # TODO: animate: windowshade
-    @el = $("<li><button class=\"btn-photo\" href=\"/photos/" + @photo.id + "\" style='background-image:url(\"" + @photo.url + "\")'/></li>")
+    @el = $("<li><button class=\"btn-photo\" href=\"/photos/" + @photo.id + "\" data-original-src=\"" + @photo.src + "\" data-hover-src=\"" + @photo.hover_src + "\" style='background-image:url(\"" + @photo.src + "\")'/></li>")
     @addEventHandlers()
     @el
+
+  hover: =>
+    button = @el.find('button')
+    button.css('background-image', "url(\"" + button.data('hover-src') + "\")")
+
+  unhover: =>
+    button = @el.find('button')
+    button.css('background-image', "url(\"" + button.data('original-src') + "\")")
 
   display: => 
     console.log 'display'
     console.log 'this is', @
     # TODO:
     console.log 'show big version of photo in main display area'
+
 
 
 

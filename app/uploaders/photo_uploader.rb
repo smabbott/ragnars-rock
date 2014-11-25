@@ -22,7 +22,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb_square do
-    process :resize_to_fit => 200
+    process :resize_to_fit => [200, 200]
   end
 
   version :thumb_wide do
@@ -41,14 +41,15 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
 private
  
-  # FIXME: this doesn't appear to work
+  # FIXME: this doesn't work as expected
   def grey_version
     manipulate! do |img|
       img.combine_options do |c|
-        c.trim
-        c.resize      "#{300}x#{100}>"
-        c.resize      "#{300}x#{100}<"
-        c.quantize(256, Magick::GRAYColorspace)
+        # c.trim
+        c.resize      "300x#100>"
+        # c.resize      "100x300<"
+        c.colorspace 'Gray'
+        # c.sigmoidal_contrast "10x0"
       end
       img
     end
