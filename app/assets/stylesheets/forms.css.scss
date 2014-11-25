@@ -1,0 +1,9 @@
+input{
+  padding:0.5em;
+  border:none;
+  background-color:$grey-medium;
+  &:focus{
+    background-color:$grey-light;
+    outline:none;
+  }
+}

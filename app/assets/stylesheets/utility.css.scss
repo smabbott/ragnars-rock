@@ -1,3 +1,8 @@
+.container{
+  margin:0 auto;
+  width:50%;
+}
+
 .hidden{
   display: none !important;
   visibility: hidden !important;
@@ -6,3 +11,9 @@
 .show {
   display: block !important;
 }
+
+.full{
+  width:100%;
+}
+
+// GRID
