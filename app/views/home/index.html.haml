@@ -1,5 +1,11 @@
-#sidebar
-  = link_to "+", new_photo_path  
+#sidebar.hidden
+  %button.btn.close *
+  %ul.photos
+  -# TODO: if logged in...
+  = link_to "+ add a photo", new_photo_path  
+  %ul.sounds
+  -# TODO: if logged in...
+  = link_to "+ add a sound", new_sound_path  
 #map-canvas
 
 :javascript

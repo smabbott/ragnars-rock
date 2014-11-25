@@ -1,3 +1,4 @@
+sidebar = {}
 window.map
 initialize = ()->
   mapOptions = {
@@ -19,32 +20,55 @@ initialize = ()->
     google.maps.event.addListener marker, 'click', handleMarkerClick
 
 handleMarkerClick = (e)->
-  
+  sidebar.show()
   $.get '/locations/' + this.id, (res)->
-      # TODO: be more nuanced
-      $("#sidebar").empty()
-      $("#sidebar").append("<img src=\"" + photo.url + "\"/>") for photo in res.photos
-      res.photos
+      sidebar.reset(res)      
     ,"json"
 
 google.maps.event.addDomListener(window, 'load', initialize)
 
-# class Sidebar = 
-#   constructor ->
-#     # reset
+$ ->
+  sidebar = new Sidebar('#sidebar')
 
-#   addPhoto: (photo)-> 
-#     # render a photo and push object to photos array
+# TODO: give these classes their own file(s)
+class Sidebar 
+  constructor: (el)->
+    @el = $(el)
+    @photosList = @el.find('.photos')
+    @soundsList = @el.find('.sounds')
+    @closeButton = @el.find('.close')
+    @closeButton.on 'click', @hide
+    @showing = false
+    @
 
-#   addSound: (sound)-> 
-#     # render a photo and push object to photos array
+  # TODO: animate/slide-toggle
+  show: =>
+    @el.removeClass('hidden') if !@showing
+    @showing = true
 
+  hide: => 
+    @el.addClass('hidden')    
+    @showing = false if @showing
+
+  reset: (location)->
+    # TODO: init labels and nav with location data
+    @photosList.empty()
+    @addPhoto(photo) for photo in location.photos
+    @soundsList.empty()
+    @soundsPhoto(sound) for sound in location.sounds
+
+  addPhoto: (photo)-> 
+    # TODO: simply create photo object. Let it take care of rendering itself
+    # TODO: animate: windowshade
+    @photosList.append("<li><button class=\"btn-photo\" href=\"/photos/" + photo.id + "\" style='background-image:url(\"" + photo.url + "\")'/></li>")
+
+  addSound: (sound)-> 
+    @soundsList.find(".sounds").append("<li><button class=\"btn-sound\" href=\"/sounds/" + sound.id + "\"/></li>") 
+
+# TODO:
 #   clear: ->
 #     # remove all sounds and photos
 
-#   reset: ->
-#     # clear
-#     # given arrays for photos and sounds fill those arrays
 
 # class Photo
 #   constructor ->

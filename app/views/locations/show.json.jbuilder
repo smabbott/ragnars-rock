@@ -5,3 +5,8 @@ json.photos @location.photos do |photo|
   json.created_at photo.created_at
   json.updated_at photo.updated_at
 end
+json.sounds @location.sounds do |sound|
+  json.id sound.id
+  json.name
+end
+
