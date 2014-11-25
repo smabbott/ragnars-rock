@@ -38,6 +38,8 @@ class Sidebar
     @soundsList = @el.find('.sounds')
     @closeButton = @el.find('.close')
     @closeButton.on 'click', @hide
+    @sounds = []
+    @photos = []
     @showing = false
     @
 
@@ -58,9 +60,9 @@ class Sidebar
     @soundsPhoto(sound) for sound in location.sounds
 
   addPhoto: (photo)-> 
-    # TODO: simply create photo object. Let it take care of rendering itself
-    # TODO: animate: windowshade
-    @photosList.append("<li><button class=\"btn-photo\" href=\"/photos/" + photo.id + "\" style='background-image:url(\"" + photo.url + "\")'/></li>")
+    photoObj = new Photo(photo)
+    @photos.push(photoObj)
+    @photosList.append(photoObj.render())
 
   addSound: (sound)-> 
     @soundsList.find(".sounds").append("<li><button class=\"btn-sound\" href=\"/sounds/" + sound.id + "\"/></li>") 
@@ -70,8 +72,27 @@ class Sidebar
 #     # remove all sounds and photos
 
 
-# class Photo
-#   constructor ->
+class Photo
+  constructor: (@photo)->
+    @el = ""
+    @
+
+  addEventHandlers: =>
+    @el.on 'click', 'button', @display
+
+  render: =>
+    # TODO: animate: windowshade
+    @el = $("<li><button class=\"btn-photo\" href=\"/photos/" + @photo.id + "\" style='background-image:url(\"" + @photo.url + "\")'/></li>")
+    @addEventHandlers()
+    @el
+
+  display: => 
+    console.log 'display'
+    console.log 'this is', @
+    # TODO:
+    console.log 'show big version of photo in main display area'
+
+
 
 # class Sound
 #   constructor ->
