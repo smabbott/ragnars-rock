@@ -1,6 +1,13 @@
 html { height: 100% }
-body { height: 100%; margin: 0; padding: 0 }
+body { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0;
+  background-color:$dark-grey;
+}
+
 #map-canvas { height: 100% }
+
 #sidebar{
   width:25%;
   max-width:300px;

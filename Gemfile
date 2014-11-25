@@ -19,6 +19,7 @@ gem 'normalize-rails'
 gem 'carrierwave'
 gem "fog"
 gem "mini_magick"
+gem 'bourbon'
 
 group :development, :test do
   gem "erb2haml" 
