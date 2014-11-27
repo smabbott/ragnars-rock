@@ -4,6 +4,7 @@ mapStyles = [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightne
 initialize = ()->
   mapOptions = {
     center: 
+      # TODO: location should be configurable
       lat:64.9498896 
       lng:-18.9058133 
     zoom: 6
@@ -73,9 +74,8 @@ class Sidebar
 #   clear: ->
 #     # remove all sounds and photos
 
-
-class Photo
-  constructor: (@photo)->
+class Medium
+  constructor: (@medium)->
     @el = ""
     @
 
@@ -86,9 +86,30 @@ class Photo
 
   render: =>
     # TODO: animate: windowshade
-    @el = $("<li><button class=\"btn-photo\" href=\"/photos/" + @photo.id + "\" data-original-src=\"" + @photo.src + "\" data-hover-src=\"" + @photo.hover_src + "\" style='background-image:url(\"" + @photo.src + "\")'/></li>")
+    @el = @template()
     @addEventHandlers()
     @el
+
+  hover: =>
+    # Override me
+
+  unhover: =>
+    # Override me
+
+  display: => 
+    console.log 'display'
+    console.log 'this is', @
+    # TODO:
+    console.log 'show big version of photo in main display area'
+
+
+class Photo extends Medium
+  constructor: (@photo)->
+    super @photo
+
+  # TODO: maybe use a html script template instead
+  template: =>
+    $("<li><button class=\"btn-photo\" href=\"/photos/" + @photo.id + "\" data-original-src=\"" + @photo.src + "\" data-hover-src=\"" + @photo.hover_src + "\" style='background-image:url(\"" + @photo.src + "\")'/></li>")
 
   hover: =>
     button = @el.find('button')
@@ -98,15 +119,12 @@ class Photo
     button = @el.find('button')
     button.css('background-image', "url(\"" + button.data('original-src') + "\")")
 
-  display: => 
-    console.log 'display'
-    console.log 'this is', @
-    # TODO:
-    console.log 'show big version of photo in main display area'
 
+class Sound
+  constructor: (@sound)->
+    super @sound
 
+  template: =>
+    $("<li><button class=\"btn-sound\" href=\"/sound/" + @sound.id + "\"> " + @sound.name + " </li>")
 
-
-# class Sound
-#   constructor ->
 
