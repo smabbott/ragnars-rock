@@ -1,7 +1,3 @@
-* google omniauth setup: https://github.com/zquestz/omniauth-google-oauth2
-https://www.digitalocean.com/community/tutorials/how-to-configure-devise-and-omniauth-for-your-rails-application
-* google login (devise)
-* users (devise)
 * batch add photos from google+, facebook or instagram
 * soundcloud integration
 * comments (acts as commentable)
@@ -10,5 +6,4 @@ https://www.digitalocean.com/community/tutorials/how-to-configure-devise-and-omn
 * logged in users can edit anything
 * panorama view
 * autodetect panorama  
-* black & white versions of thumbnails as non-hover states
 * a default image will signal that the original image can't be found and will help prevent trying to show missing images

@@ -10,7 +10,7 @@ class LocationsController < ApplicationController
   end
 
   def new
-    @location = Location.new
+    @location = Location.new(location_params)
   end
 
   def edit

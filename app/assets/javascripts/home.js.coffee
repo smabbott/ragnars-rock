@@ -1,4 +1,6 @@
-sidebar = {}
+canCreateLocation = false
+editMode = false
+$sidebar = {}
 window.map
 mapStyles = [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#333333"},{"lightness":-77},{"saturation":-100}]}]
 initialize = ()->
@@ -12,10 +14,12 @@ initialize = ()->
   }
   # Create the map
   window.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
+  google.maps.event.addListener map, 'click', addLocation
 
   # Add locations to it
   for location in window.locations
     marker = new google.maps.Marker
+      icon: "/assets/icons/marker.png"
       position: new google.maps.LatLng(parseFloat(location.coordinates[0]), parseFloat(location.coordinates[1]))
       map: window.map
       title: location.name
@@ -23,15 +27,50 @@ initialize = ()->
     google.maps.event.addListener marker, 'click', handleMarkerClick
 
 handleMarkerClick = (e)->
-  sidebar.show()
+  $sidebar.show()
   $.get '/locations/' + this.id, (res)->
-      sidebar.reset(res)
+      $sidebar.reset(res)
     ,"json"
+
+addLocation = (e)->
+  if editMode
+    # navigate to new location page
+    window.location.href = "locations/new?location[coordinates]=" + e.latLng.toString()
+
+# addLocation = (e)->
+#   if canCreateLocation
+#     marker = new google.maps.Marker
+#       position: e.latLng
+#       map: window.map
+#       title: "New Location"
+#     google.maps.event.addListener marker, 'click', handleMarkerClick    
+#     $sidebar.show()
+#     $sidebar.reset({})
 
 google.maps.event.addDomListener(window, 'load', initialize)
 
 $ ->
-  sidebar = new Sidebar('#sidebar')
+  canCreateLocation = window.currentUser?
+  $addMarkerBtn = $('#add-marker-btn')
+  $sidebar = new Sidebar('#sidebar')
+
+  # TODO: move to a conditional admin js file
+  toggleEditMode = (e)->
+    if editMode
+      editModeOff(e)
+    else
+      editModeOn(e)
+
+  editModeOn = (e)->
+    editMode = true
+    window.map.setOptions({draggableCursor:"url(/assets/icons/new_marker.cur) 8 8, default";})
+
+  editModeOff = (e)->
+    editMode = false
+    window.map.setOptions({draggableCursor:null;})    
+
+  $addMarkerBtn.on 'click', toggleEditMode 
+
 
 # TODO: give these classes their own file(s)
 class Sidebar 
@@ -57,10 +96,13 @@ class Sidebar
 
   reset: (location)->
     # TODO: init labels and nav with location data
+    @location ?= location
+    @photos = []
+    @sounds = []
     @photosList.empty()
-    @addPhoto(photo) for photo in location.photos
+    @addPhoto(photo) for photo in @location.photos
     @soundsList.empty()
-    @soundsPhoto(sound) for sound in location.sounds
+    @soundsPhoto(sound) for sound in @location.sounds
 
   addPhoto: (photo)-> 
     photoObj = new Photo(photo)
@@ -109,15 +151,15 @@ class Photo extends Medium
 
   # TODO: maybe use a html script template instead
   template: =>
-    $("<li><button class=\"btn-photo\" href=\"/photos/" + @photo.id + "\" data-original-src=\"" + @photo.src + "\" data-hover-src=\"" + @photo.hover_src + "\" style='background-image:url(\"" + @photo.src + "\")'/></li>")
+    $("<li><button class=\"btn-photo\" href=\"/photos/" + @photo.id + "\" style='background-image:url(\"" + @photo.src + "\")'/></li>")
 
   hover: =>
-    button = @el.find('button')
-    button.css('background-image', "url(\"" + button.data('hover-src') + "\")")
+    # button = @el.find('button')
+    # button.css('background-image', "url(\"" + button.data('hover-src') + "\")")
 
   unhover: =>
-    button = @el.find('button')
-    button.css('background-image', "url(\"" + button.data('original-src') + "\")")
+    # button = @el.find('button')
+    # button.css('background-image', "url(\"" + button.data('original-src') + "\")")
 
 
 class Sound

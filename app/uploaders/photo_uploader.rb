@@ -29,9 +29,9 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [300, 100]
   end
 
-  version :thumb_wide_grey do
-    process :grey_version
-  end
+  # version :thumb_wide_grey do
+  #   process :grey_version
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -42,17 +42,17 @@ class PhotoUploader < CarrierWave::Uploader::Base
 private
  
   # FIXME: this doesn't work as expected
-  def grey_version
-    manipulate! do |img|
-      img.combine_options do |c|
-        # c.trim
-        c.resize      "300x#100>"
-        # c.resize      "100x300<"
-        c.colorspace 'Gray'
-        # c.sigmoidal_contrast "10x0"
-      end
-      img
-    end
-  end
+  # def grey_version
+  #   manipulate! do |img|
+  #     img.combine_options do |c|
+  #       # c.trim
+  #       c.resize      "300x#100>"
+  #       # c.resize      "100x300<"
+  #       c.colorspace 'Gray'
+  #       # c.sigmoidal_contrast "10x0"
+  #     end
+  #     img
+  #   end
+  # end
 
 end

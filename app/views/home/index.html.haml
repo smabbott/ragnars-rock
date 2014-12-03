@@ -7,6 +7,8 @@
   -# TODO: if logged in...
   = link_to "+ sound", new_sound_path, class: 'btn full' 
 #map-canvas
-
+#add-marker-btn.btn{draggable: true, ondragstart:'drag(event)'}
+  &plus;
+=# image_tag('icons/new_marker.cur')
 :javascript
   window.locations = #{@locations.to_json}

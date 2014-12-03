@@ -10,3 +10,7 @@
     %p.notice= notice
     %p.alert= alert
     = yield
+    
+    - if current_user
+      :javascript
+        window.currentUser = #{current_user.id}
