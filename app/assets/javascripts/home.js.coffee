@@ -76,6 +76,7 @@ $ ->
 class Sidebar 
   constructor: (el)->
     @el = $(el)
+    @openWidth = '25%'
     @photosList = @el.find('.photos')
     @soundsList = @el.find('.sounds')
     @closeButton = @el.find('.close')
@@ -87,8 +88,10 @@ class Sidebar
 
   # TODO: animate/slide-toggle
   show: =>
+    @el.width(0)
     @el.removeClass('hidden') if !@showing
-    @showing = true
+    @el.animate {width:@openWidth}, 200, 'swing', =>
+      @showing = true
 
   hide: => 
     @el.addClass('hidden')    
@@ -103,6 +106,7 @@ class Sidebar
     @addPhoto(photo) for photo in @location.photos
     @soundsList.empty()
     @soundsPhoto(sound) for sound in @location.sounds
+    @openWidth = @el.outerWidth()
 
   addPhoto: (photo)-> 
     photoObj = new Photo(photo)
