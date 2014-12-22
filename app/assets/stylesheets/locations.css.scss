@@ -1,3 +1,44 @@
 // Place all the styles related to the Locations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.location-header{
+  padding:$dot-size;
+  hr.path{
+    height:4px;
+    background-image: url("blue-dot-border.png");
+    background-repeat:repeat-x;
+    background-position: center center;
+    border:none;
+    padding:10px;
+    margin:0;
+    position:relative;
+    &:before, &:after{
+      content:'';
+      display:block;
+      background-color:white;
+      width:$dot-size;
+      height:$dot-size;
+      border-radius:10px;
+      position:absolute;
+      top: 50%;
+      margin-top: -8px;
+    }
+    &:before{
+      left:0;
+    }
+    &:after{
+      right:0;
+    }
+  }
+}
+
+.location-name{
+  text-align: center;
+}
+
+.marker{
+  position:absolute;
+  top:14px;
+  left:50%;
+  margin-left:-14px;
+}

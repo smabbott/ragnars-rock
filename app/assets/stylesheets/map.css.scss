@@ -2,14 +2,17 @@
 //   cursor:url('/assets/images/icons/new_marker.cur')
 // }
 
-#add-marker-btn{
+.add-marker{
   position:absolute;
   bottom:30px;
   right:30px;
-  width:30px;
-  height:30px;
-  background-color:#ccc;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  padding:0;
+  background-color:transparent;
+  width:32px;
+  height:38px;
+  background-image:url(asset_path('icons/new-location-marker.png'));
+  background-repeat:no-repeat;
 }

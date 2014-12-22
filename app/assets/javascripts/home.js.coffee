@@ -76,6 +76,7 @@ $ ->
 class Sidebar 
   constructor: (el)->
     @el = $(el)
+    @locationName = @el.find('.location-name')
     @openWidth = '25%'
     @photosList = @el.find('.photos')
     @soundsList = @el.find('.sounds')
@@ -106,7 +107,8 @@ class Sidebar
     @addPhoto(photo) for photo in @location.photos
     @soundsList.empty()
     @soundsPhoto(sound) for sound in @location.sounds
-    @openWidth = @el.outerWidth()
+    @locationName.text(@location.name)
+
 
   addPhoto: (photo)-> 
     photoObj = new Photo(photo)

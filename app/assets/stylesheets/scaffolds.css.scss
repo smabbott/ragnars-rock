@@ -1,9 +1,20 @@
+@font-face {
+  font-family: 'raleway';
+  src: font-url('OpenSans-Regular-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
+  font-family:'raleway';
   background-color: #fff;
   color: $grey-near-white;
-  font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+h1, h2, h3, h4, h5, h6{
+  margin-top:0px;
 }
 
 p, ol, ul, td {

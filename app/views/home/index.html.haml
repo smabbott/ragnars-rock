@@ -1,4 +1,8 @@
 #sidebar.hidden
+  .location-header
+    %hr.path
+    %img.marker{src:asset_path('icons/marker-selected.png')}
+  %h2.location-name
   %button.btn.close *
   %ul.photos
   -# TODO: if logged in...
@@ -7,7 +11,7 @@
   -# TODO: if logged in...
   = link_to "+ sound", new_sound_path, class: 'btn full' 
 #map-canvas
-#add-marker-btn.btn{draggable: true, ondragstart:'drag(event)'}
+#add-marker-btn.btn.add-marker{draggable: true, ondragstart:'drag(event)'}
   &plus;
 =# image_tag('icons/new_marker.cur')
 :javascript
