@@ -28,6 +28,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     acts_as_commentable (4.0.1)
+    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
     better_errors (2.0.0)
@@ -36,9 +37,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (3.2.1)
-      sass (~> 3.2)
-      thor
     builder (3.2.2)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -131,6 +129,10 @@ GEM
     json (1.8.1)
     jwt (0.1.13)
       multi_json (>= 1.5)
+    koala (1.10.1)
+      addressable
+      faraday
+      multi_json
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
@@ -245,7 +247,6 @@ DEPENDENCIES
   acts_as_commentable
   better_errors
   binding_of_caller
-  bourbon
   carrierwave
   coffee-rails (~> 4.0.0)
   debugger
@@ -257,6 +258,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  koala (~> 1.10.1)
   mini_magick
   normalize-rails
   omniauth

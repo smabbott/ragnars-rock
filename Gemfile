@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
 gem 'haml'
 gem 'haml-rails'
 gem 'uglifier', '>= 1.3.0'
@@ -19,7 +21,8 @@ gem 'normalize-rails'
 gem 'carrierwave'
 gem "fog"
 gem "mini_magick"
-gem 'bourbon'
+# FB integration
+gem "koala", "~> 1.10.1"
 
 group :development, :test do
   gem "erb2haml" 
