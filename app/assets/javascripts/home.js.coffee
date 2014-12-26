@@ -11,6 +11,11 @@ initialize = ()->
       lng:-18.9058133 
     zoom: 6
     styles:mapStyles
+    panControl:false
+    streetViewControl:false
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+    zoomControlOptions:
+      style: 'SMALL'
   }
   # Create the map
   window.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
@@ -89,14 +94,17 @@ class Sidebar
 
   # TODO: animate/slide-toggle
   show: =>
-    @el.width(0)
-    @el.removeClass('hidden') if !@showing
-    @el.animate {width:@openWidth}, 200, 'swing', =>
-      @showing = true
+    if !@showing
+      @el.width(0)
+      @el.removeClass('hidden')
+      @el.animate {width:@openWidth}, 200, 'swing', =>
+        @showing = true
 
   hide: => 
-    @el.addClass('hidden')    
-    @showing = false if @showing
+    if @showing
+      @el.animate {width:0}, 200, 'swing', =>
+        @el.addClass('hidden')    
+        @showing = false
 
   reset: (location)->
     # TODO: init labels and nav with location data

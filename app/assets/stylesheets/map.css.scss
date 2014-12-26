@@ -2,7 +2,16 @@
 //   cursor:url('/assets/images/icons/new_marker.cur')
 // }
 
+@mixin shady {
+ text-shadow:0px 1px 2px rgba(0,0,0,0.7);
+}
+
+.btn:hover{
+  color:$blue;
+}
+
 .add-marker{
+  @include shady;
   position:absolute;
   bottom:30px;
   right:30px;
@@ -11,8 +20,32 @@
   -ms-user-select: none;
   padding:0;
   background-color:transparent;
-  width:32px;
-  height:38px;
-  background-image:url(asset_path('icons/new-location-marker.png'));
-  background-repeat:no-repeat;
+  font-size:32px;
 }
+
+.day-nav{
+  position:relative;
+  top:1em;
+  left:5em;
+  float:left;
+  z-index:100;
+  .btn{
+    @include shady;
+  }
+}
+
+// TODO: make an icon font
+.day{
+  background-image:url(asset_path('icons/moon-sprite.png'));
+  background-repeat:no-repeat;
+  width:14px;
+  height:14px;
+  &:hover{
+    background-position-y:-14px;
+  }
+}
+
+.day-1{
+  background-position:0 0;
+}
+

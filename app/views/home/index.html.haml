@@ -6,13 +6,25 @@
   %button.btn.close *
   %ul.photos
   -# TODO: if logged in...
-  = link_to "+ photo", new_photo_path, class: 'btn full'
+  = link_to("+ photo", new_photo_path, class: 'btn full') if current_user
   %ul.sounds
   -# TODO: if logged in...
-  = link_to "+ sound", new_sound_path, class: 'btn full' 
-#map-canvas
-#add-marker-btn.btn.add-marker{draggable: true, ondragstart:'drag(event)'}
-  &plus;
+  = link_to("+ sound", new_sound_path, class: 'btn full') if current_user
+#main
+  .day-nav
+    %span DAY
+    %ul.list-inline
+      - if @days
+        - @days.each_with_index do |day, i|
+          %li
+            %button.btn
+              %i{class:"rf-phase-#{i%7}"}
+      %li
+        %button.btn
+          %i.rf-phase-add
+  #map-canvas
+  #add-marker-btn.btn.add-marker{draggable: true, ondragstart:'drag(event)'}
+    %i.rf-marker-add
 =# image_tag('icons/new_marker.cur')
 :javascript
   window.locations = #{@locations.to_json}
