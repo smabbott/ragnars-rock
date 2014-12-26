@@ -21,6 +21,7 @@
 %h2 Photos
 = select_tag(:import, options_for_select([ "Upload", "Facebook", "Google+", "Google Drive"]), prompt: 'import')
 
-%ul.photos
+.row.photos
   - @location.photos.each do |photo|
-    %li.photo
+    .photo.col-xs-4.col-sm-3.col-md-2
+      %img{src:photo.photo.thumb_square_small.url}

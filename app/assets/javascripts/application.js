@@ -13,4 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+
+// Custom bootstrap includes
+//= require bootstrap/button
+//= require bootstrap/dropdown
+//= require bootstrap/transition
+
 //= require_tree .
