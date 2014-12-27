@@ -2,12 +2,22 @@
   position:relative;
   &.selected{
     &:before{
+      content: " ";
+      position: absolute;
+      top: 0;
+      right: 5px;
+      display: block;
+      background-color: $grey-dark;
+      width: 20px;
+      height: 20px;
+    }
+    &:after{
       content:' ';
       position:absolute;
       top:0;
       right:5px;
-      border-top:20px solid $blue;
-      border-left:20px solid transparent;
+      border-bottom:20px solid $blue;
+      border-right:20px solid transparent;
     }
   }
 }
