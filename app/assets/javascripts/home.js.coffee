@@ -4,32 +4,34 @@ $sidebar = {}
 window.map
 mapStyles = [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#333333"},{"lightness":-77},{"saturation":-100}]}]
 initialize = ()->
-  mapOptions = {
-    center: 
-      # TODO: location should be configurable
-      lat:64.9498896 
-      lng:-18.9058133 
-    zoom: 6
-    styles:mapStyles
-    panControl:false
-    streetViewControl:false
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-    zoomControlOptions:
-      style: 'SMALL'
-  }
-  # Create the map
-  window.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
-  google.maps.event.addListener map, 'click', addLocation
+  canvas = document.getElementById('map-canvas')
+  if canvas?
+    mapOptions = {
+      center: 
+        # TODO: location should be configurable
+        lat:64.9498896 
+        lng:-18.9058133 
+      zoom: 6
+      styles:mapStyles
+      panControl:false
+      streetViewControl:false
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+      zoomControlOptions:
+        style: 'SMALL'
+    }
+    # Create the map
+    window.map = new google.maps.Map(canvas, mapOptions)
+    google.maps.event.addListener map, 'click', addLocation
 
-  # Add locations to it
-  for location in window.locations
-    marker = new google.maps.Marker
-      icon: "/assets/icons/marker.png"
-      position: new google.maps.LatLng(parseFloat(location.coordinates[0]), parseFloat(location.coordinates[1]))
-      map: window.map
-      title: location.name
-      id: location.id
-    google.maps.event.addListener marker, 'click', handleMarkerClick
+    # Add locations to it
+    for location in window.locations
+      marker = new google.maps.Marker
+        icon: "/assets/icons/marker.png"
+        position: new google.maps.LatLng(parseFloat(location.coordinates[0]), parseFloat(location.coordinates[1]))
+        map: window.map
+        title: location.name
+        id: location.id
+      google.maps.event.addListener marker, 'click', handleMarkerClick
 
 handleMarkerClick = (e)->
   $sidebar.show()
@@ -52,29 +54,31 @@ addLocation = (e)->
 #     $sidebar.show()
 #     $sidebar.reset({})
 
+# only on right screen
 google.maps.event.addDomListener(window, 'load', initialize)
 
 $ ->
-  canCreateLocation = window.currentUser?
-  $addMarkerBtn = $('#add-marker-btn')
-  $sidebar = new Sidebar('#sidebar')
+  if $('#map-canvas')
+    canCreateLocation = window.currentUser?
+    $addMarkerBtn = $('#add-marker-btn')
+    $sidebar = new Sidebar('#sidebar')
 
-  # TODO: move to a conditional admin js file
-  toggleEditMode = (e)->
-    if editMode
-      editModeOff(e)
-    else
-      editModeOn(e)
+    # TODO: move to a conditional admin js file
+    toggleEditMode = (e)->
+      if editMode
+        editModeOff(e)
+      else
+        editModeOn(e)
 
-  editModeOn = (e)->
-    editMode = true
-    window.map.setOptions({draggableCursor:"url(/assets/icons/new_marker.cur) 8 8, default";})
+    editModeOn = (e)->
+      editMode = true
+      window.map.setOptions({draggableCursor:"url(/assets/icons/new_marker.cur) 8 8, default";})
 
-  editModeOff = (e)->
-    editMode = false
-    window.map.setOptions({draggableCursor:null;})    
+    editModeOff = (e)->
+      editMode = false
+      window.map.setOptions({draggableCursor:null;})    
 
-  $addMarkerBtn.on 'click', toggleEditMode 
+    $addMarkerBtn.on 'click', toggleEditMode 
 
 
 # TODO: give these classes their own file(s)

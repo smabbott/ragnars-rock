@@ -1,3 +1,5 @@
+@import "bootstrap-sprockets";
+@import "bootstrap-custom-variables";
 @import "bootstrap-custom";
 @import "variables";
 @import "reynisfjara";
@@ -9,4 +11,5 @@
 @import "home";
 @import "lists";
 @import "locations";
-@import "map"
+@import "map";
+@import "photos";

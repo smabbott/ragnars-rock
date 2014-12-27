@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
+  before_action :set_all_locations, only:[:edit, :new]
   skip_before_filter :authenticate_user!, only: :show
 
   def index
@@ -53,6 +54,11 @@ class LocationsController < ApplicationController
   private
     def set_location
       @location = Location.find(params[:id])
+    end
+
+    def set_all_locations
+      id = @location.nil? ? nil : @location.id
+      @locations = Location.where.not(id: id).select(:id, :name)
     end
 
     def location_params

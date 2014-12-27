@@ -1,0 +1,21 @@
+.photo{
+  position:relative;
+  &.selected{
+    &:before{
+      content:' ';
+      position:absolute;
+      top:0;
+      right:5px;
+      border-top:20px solid $blue;
+      border-left:20px solid transparent;
+    }
+  }
+}
+
+.select-mode .photo{
+  cursor:pointer;
+}
+
+.sort-mode .photo{
+  cursor:move;
+}

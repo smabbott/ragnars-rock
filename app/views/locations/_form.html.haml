@@ -18,10 +18,43 @@
   .actions
     = f.submit
 
-%h2 Photos
-= select_tag(:import, options_for_select([ "Upload", "Facebook", "Google+", "Google Drive"]), prompt: 'import')
+.gallery
+  %h2 Photos
+  .button-toolbar
+    .btn-group
+      %button.btn.btn-default.dropdown-toggle{type:"button", data:{toggle:"dropdown"}, aria:{expanded:"false"}}
+        Import 
+        %span.caret
+      %ul.dropdown-menu{role:"menu"}
+        %li
+          %a{href:"#"} Upload
+        %li
+          %a{href:"#"} Facebook
+        %li
+          %a{href:"#"} Google+
 
-.row.photos
-  - @location.photos.each do |photo|
-    .photo.col-xs-4.col-sm-3.col-md-2
-      %img{src:photo.photo.thumb_square_small.url}
+    .mode-toggle.btn-radio-group.btn-group
+      %label
+        %input{type:'radio', name:'mode', checked:true}
+        %span.btn.btn-default +
+      %label
+        %input{type:'radio', name:'mode'}
+        %span.btn.btn-default ^
+
+    .batch-actions
+      %button.btn.btn-danger.delete{disabed:true}
+        %i.glyphicon.glyphicon-trash
+
+      .btn-group
+        %button.btn.btn-default.dropdown-toggle{type:"button", data:{toggle:"dropdown"}, aria:{expanded:"false"}, disabled:true}
+          Move To
+          %span.caret
+        %ul.dropdown-menu{role:"menu"}
+          - @locations.each do |loc|
+            %li
+              %a{href:"#", data:{location:{id:loc.id}}}= loc.name
+
+  .row.photos
+    - @location.photos.each do |photo|
+      .photo.col-xs-4.col-sm-3.col-md-2{data:{id:photo.id}}
+        %img{src:photo.photo.thumb_square_small.url}

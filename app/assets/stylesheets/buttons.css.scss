@@ -25,3 +25,14 @@ button, .btn{
   }
 }
 
+// Checkbox hack for exclusive toggle buttons
+.btn-radio-group{
+  input[type=radio]{
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    &:checked ~ span{
+      background-color:$blue;
+    }
+  }
+}
