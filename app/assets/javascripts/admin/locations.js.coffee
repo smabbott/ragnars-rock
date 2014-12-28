@@ -14,15 +14,17 @@ window.Admin.SortableGallery = class SortableGallery
     self = @
     @el.on 'click', '.photos .photo', (e)->
       $(this).trigger('select') if self.mode == 'select'
+      self.toggleBatchActions()
 
   toggleMode:=>
-    @el.removeClass('select-mode, sort-mode')
+    @el.removeClass('select-mode sort-mode')
     @mode = if @mode == 'sort' then 'select' else 'sort'
     @el.addClass(@mode + '-mode')
 
   toggleBatchActions:=>
-    @batchActions.prop 'disabled', (@mode == 'sort')
-    console.log 'toggle batch batch-actionss'
+    self = @
+    @batchActions.each ->
+      $(this).prop 'disabled', self.getSelectedPhotos().length == 0
 
   # Photos 
   getPhotos:->
