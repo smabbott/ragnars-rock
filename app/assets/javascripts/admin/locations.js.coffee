@@ -20,6 +20,7 @@ window.Admin.SortableGallery = class SortableGallery
     @el.removeClass('select-mode sort-mode')
     @mode = if @mode == 'sort' then 'select' else 'sort'
     @el.addClass(@mode + '-mode')
+    @deselectAllPhotos() if @mode == 'sort'
 
   toggleBatchActions:=>
     self = @
@@ -36,6 +37,9 @@ window.Admin.SortableGallery = class SortableGallery
   selectPhoto:(photo)->
     photo.select()
 
+  deselectAllPhotos:->
+    @getSelectedPhotos().each ->
+      $(this).trigger('deselect')
 
 window.Admin.Photo = class Photo
   constructor:(@el)->
@@ -43,8 +47,13 @@ window.Admin.Photo = class Photo
     @applyHandlers()
 
   applyHandlers:->
-    @el.on 'select', =>
+    @el
+    .on 'select', =>
       @toggleSelect()
+    .on 'deselect', =>
+      @el.removeClass('selected')
+
+
 
   toggleSelect:->
     @selected = !@selected
