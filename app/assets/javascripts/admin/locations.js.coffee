@@ -3,6 +3,7 @@ window.Admin or= {}
 window.Admin.SortableGallery = class SortableGallery
 
   constructor:(@el)->
+    @gallery = @el.find '.photos'
     @photos = (new window.Admin.Photo($(photo)) for photo in @el.find('.photos .photo'))
     @mode = 'sort'
     @toggles = @el.find('.mode-toggle [type=radio]')
@@ -15,12 +16,23 @@ window.Admin.SortableGallery = class SortableGallery
     @el.on 'click', '.photos .photo', (e)->
       $(this).trigger('select') if self.mode == 'select'
       self.toggleBatchActions()
+    
+    @gallery.sortable()
+    .disableSelection()
+    .on 'sortstop', (e)->
+      # console.log 'sort end'
+      # TODO: trigger update of order of photos
+
 
   toggleMode:=>
     @el.removeClass('select-mode sort-mode')
     @mode = if @mode == 'sort' then 'select' else 'sort'
     @el.addClass(@mode + '-mode')
-    @deselectAllPhotos() if @mode == 'sort'
+    if @mode == 'sort'
+      @deselectAllPhotos() 
+      # @el.find('.photos .photo').prop('draggable', true)
+    else
+      # @el.find('.photos .photo').prop('draggable', false)
 
   toggleBatchActions:=>
     self = @
@@ -52,6 +64,23 @@ window.Admin.Photo = class Photo
       @toggleSelect()
     .on 'deselect', =>
       @el.removeClass('selected')
+
+    # .on 'dragstart', ->
+    #   console.log 'drag start'
+    # .on 'dragenter', (e)->
+    #   console.log 'drag enter'
+    # .on 'dragleave', ->
+    #   console.log 'drag leave'
+    #   $(this).css('margin-left', '0px')
+    # .on 'drop', ->
+    #   console.log 'drag drop'
+    # .on 'dragend', ->
+    #   console.log 'drag end'
+    #   # .on 'drag', ->
+    #   #   console.log 'drag'
+    # .on 'dragover', ->
+    #   $(this).css('margin-left', '50px')
+    #   console.log 'drag over'
 
 
 
