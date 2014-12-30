@@ -61,6 +61,14 @@ class PhotosController < ApplicationController
     end
   end
 
+
+  def sort
+    params[:photo_ids].each_with_index do |id, index|
+      Photo.where(id: id).update_all(position: index+1)
+    end
+    render json: nil, status: :ok
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo

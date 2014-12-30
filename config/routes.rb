@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   root "home#index"
   resources :sounds
 
-  resources :photos
+  resources :photos do
+    collection do
+      post :sort
+    end
+  end
 
   resources :locations
 

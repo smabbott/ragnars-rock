@@ -54,7 +54,9 @@
             %li
               %a{href:"#", data:{location:{id:loc.id}}}= loc.name
 
-  %ul.list-inline.photos
-    - @location.photos.each do |photo|
-      %li.photo.col-xs-4.col-sm-3.col-md-2{data:{id:photo.id}}
-        %img{src:photo.photo.thumb_square_small.url}
+  = form_tag sort_photos_path, class: 'sortable-gallery-form', remote: true do
+    %ul.list-inline.photos
+      - @location.photos.each do |photo|
+        %li.photo.col-xs-4.col-sm-3.col-md-2{data:{id:photo.id}}
+          %img{src:photo.photo.thumb_square_small.url}
+          %input{type:"hidden", name:'photo_ids[]', value: photo.id}

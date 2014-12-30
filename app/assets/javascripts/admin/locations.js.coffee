@@ -3,6 +3,7 @@ window.Admin or= {}
 window.Admin.SortableGallery = class SortableGallery
 
   constructor:(@el)->
+    @galleryForm = @el.find('.sortable-gallery-form')
     @gallery = @el.find '.photos'
     @photos = (new window.Admin.Photo($(photo)) for photo in @el.find('.photos .photo'))
     @mode = 'sort'
@@ -20,8 +21,9 @@ window.Admin.SortableGallery = class SortableGallery
     @gallery.sortable()
     .disableSelection()
     .on 'sortstop', (e)->
-      # console.log 'sort end'
-      # TODO: trigger update of order of photos
+      # $(photo).find('input').val(i) for photo, i in self.gallery.find('.photo')
+      # TODO: submit
+      self.galleryForm.trigger('submit')
 
 
   toggleMode:=>
