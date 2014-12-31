@@ -36,10 +36,12 @@
     .mode-toggle.btn-radio-group.btn-group
       %label
         %input{type:'radio', name:'mode', checked:true}
-        %span.btn.btn-default +
+        %span.btn.btn-default
+          %i.glyphicon.glyphicon-move
       %label
         %input{type:'radio', name:'mode'}
-        %span.btn.btn-default ^
+        %span.btn.btn-default
+          %i.glyphicon.glyphicon-ok-sign
 
     .batch-actions
       %button.btn.btn-danger.delete{disabled:true}
@@ -55,8 +57,8 @@
               %a{href:"#", data:{location:{id:loc.id}}}= loc.name
 
   = form_tag sort_photos_path, class: 'sortable-gallery-form', remote: true do
-    %ul.list-inline.photos
+    %ul.list-inline.photos.sortable
       - @location.photos.each do |photo|
-        %li.photo.col-xs-4.col-sm-3.col-md-2{data:{id:photo.id}}
+        %li.photo{data:{id:photo.id}}
           %img{src:photo.photo.thumb_square_small.url}
           %input{type:"hidden", name:'photo_ids[]', value: photo.id}

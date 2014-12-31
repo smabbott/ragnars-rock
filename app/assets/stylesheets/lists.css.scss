@@ -4,6 +4,10 @@ ul, ol{
   list-style:none;
 }
 
-.photos li{
+#sidebar .photos li{
   padding: 0.5em 0;
+}
+
+.list-inline.sortable li{
+  vertical-align: top;
 }
