@@ -23,6 +23,8 @@ gem "fog"
 gem "mini_magick"
 # FB integration
 gem "koala", "~> 1.10.1"
+# direct s3 file uploading
+gem 's3_file_field'
 
 group :development, :test do
   gem "erb2haml" 
