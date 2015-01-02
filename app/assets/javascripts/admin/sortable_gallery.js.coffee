@@ -10,6 +10,7 @@ window.Admin.SortableGallery = class SortableGallery
     @toggles = @el.find('.mode-toggle [type=radio]')
     @batchActions = @el.find('.batch-actions .btn')
     @applyHandlers()
+    @
 
   applyHandlers:->
     self = @
@@ -61,3 +62,10 @@ window.Admin.SortableGallery = class SortableGallery
   deselectAllPhotos:->
     @getSelectedPhotos().each ->
       $(this).trigger('deselect')
+
+  addPhoto:()=>
+    photo = new window.Admin.Photo()
+    @el.find('.photos').append(photo.el)
+    @photos.push photo
+    photo
+

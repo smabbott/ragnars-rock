@@ -25,11 +25,16 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(photo_params)
+    # TODO:
+    # 1st, author must be integer
+    # 2nd, must track name and photo of authors from google
+    # then we can default the author to the current user
+    # @photo.author = current_user if @photo.author.nil?
 
     respond_to do |format|
       if @photo.save
         format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.json { render :show, status: :created, location: @photo }
+        format.json { render :show, status: :created, photo: @photo }
       else
         format.html { render :new }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
@@ -43,7 +48,7 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.update(photo_params)
         format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @photo }
+        format.json { render :show, status: :ok, photo: @photo }
       else
         format.html { render :edit }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
@@ -77,6 +82,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:author, :location_id, :photo)
+      params.require(:photo).permit(:author, :location_id, :photo, :remote_photo_url)
     end
 end
