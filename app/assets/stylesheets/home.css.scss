@@ -15,6 +15,7 @@ body {
 #map-canvas { height: 100% }
 
 #sidebar{
+  overflow:scroll;
   padding:1em;
   position:relative;
   width:25%;

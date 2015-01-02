@@ -22,12 +22,11 @@
   %h2 Photos
   .button-toolbar
     .btn-group
-      %button.btn.btn-default.dropdown-toggle{type:"button", data:{toggle:"dropdown"}, aria:{expanded:"false"}}
-        Import 
-        %span.caret
+      %button.btn.btn-default.dropdown-toggle{type:"button", data:{toggle:"dropdown"}, aria:{expanded:"false"}, title:'Import Photos'}
+        %span.glyphicon.glyphicon-upload
       %ul.dropdown-menu{role:"menu"}
         %li
-          %a{href:"#"} Upload
+          %a{href:"#"} From Disk
         %li
           %a{href:"#"} Facebook
         %li
