@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .location-header{
-  padding:$dot-size;
+  padding:$dot-size 0;
   hr.path{
     height:4px;
     background-image: url("blue-dot-border.png");

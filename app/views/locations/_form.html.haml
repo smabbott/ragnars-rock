@@ -28,7 +28,7 @@
         %li
           %a{href:"#"} From Disk
         %li
-          %a{href:"#"} Facebook
+          %a.facebook-import-trigger{href:"#"} Facebook
         %li
           %a{href:"#"} Google+
 
@@ -67,3 +67,30 @@
     = f.s3_file_field :photos, :class => 'js-s3_file_field', multiple: true #, :key => "/uploads/${timestamp}/${filename}"
     / .progress
     / .meter{ :style => "width: 0%" }
+
+:javascript
+  // window.fbAsyncInit = function() {
+  window.initFB = function(){
+    FB.init({
+      appId      : '#{ENV["FB_APP_ID"]}',
+      xfbml      : false,
+      version    : 'v2.1'
+    });
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        console.log('Logged in.');
+      }
+      else {
+        FB.login();
+      }
+    });
+    console.log('FB init');
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));

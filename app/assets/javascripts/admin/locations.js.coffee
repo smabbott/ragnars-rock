@@ -48,3 +48,5 @@ $ ->
 
         # console.log("progress for #{data.files[0].unique_id}")
         photoUploads[data.files[0].unique_id].progress(progress)
+
+  $('.facebook-import-trigger').on 'click', window.initFB
