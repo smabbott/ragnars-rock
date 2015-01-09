@@ -53,4 +53,13 @@ $ ->
     window.fbLogin ->
       FB.api '/me/albums', (res)->
         # create a modal with thumbs of album covers and names.
+        # build clickable album objects
+
+        albums = res.data.map (a)->
+          a.name
+
+        $('#album-browser .modal-body').empty().append(albums.join(', '))
+        $('#album-browser').modal('show')
+          
         console.log res
+

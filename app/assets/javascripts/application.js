@@ -20,5 +20,6 @@
 //= require bootstrap/button
 //= require bootstrap/dropdown
 //= require bootstrap/transition
+//= require bootstrap/modal
 
 //= require_tree .

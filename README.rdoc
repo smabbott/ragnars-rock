@@ -13,3 +13,6 @@ These are early days. Very little is in place at this point.
 * display panorama images
 * initial map location should be configurable
 ...
+
+
+breadcrumbs
