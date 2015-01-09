@@ -69,22 +69,31 @@
     / .meter{ :style => "width: 0%" }
 
 :javascript
-  // window.fbAsyncInit = function() {
-  window.initFB = function(){
+  
+  window.fbAT = null;
+
+  window.fbAsyncInit = function() {
     FB.init({
       appId      : '#{ENV["FB_APP_ID"]}',
       xfbml      : false,
       version    : 'v2.1'
     });
-    FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        console.log('Logged in.');
+    console.log('init FB')
+  };
+
+  window.fbLogin = function(cb){
+    FB.getLoginStatus(function(res) {
+      if (res.status === 'connected') {
+        cb();
       }
       else {
-        FB.login();
+        FB.login(function(res){
+          if(res.authResponse){
+            cb();
+          }
+        },{scope : 'user_photos'});
       }
     });
-    console.log('FB init');
   };
 
   (function(d, s, id){

@@ -49,4 +49,8 @@ $ ->
         # console.log("progress for #{data.files[0].unique_id}")
         photoUploads[data.files[0].unique_id].progress(progress)
 
-  $('.facebook-import-trigger').on 'click', window.initFB
+  $('.facebook-import-trigger').on 'click', ->
+    window.fbLogin ->
+      FB.api '/me/albums', (res)->
+        # create a modal with thumbs of album covers and names.
+        console.log res
