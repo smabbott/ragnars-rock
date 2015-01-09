@@ -1,4 +1,4 @@
-=====Ragnar's Rock
+====Ragnar's Rock
 A tool for collboratively building a multimedia record of a trip through photos, video and audio.
 
 =====WIP
