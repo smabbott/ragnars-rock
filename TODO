@@ -1,9 +1,10 @@
-* batch add photos from google+, facebook or instagram
+* batch add photos from google+ and instagram
 * soundcloud integration
 * comments (acts as commentable)
 * auto-detect location by EXIF data
-* everything is public-read. 
-* logged in users can edit anything
+* permissions
+  * everything is public-read. 
+  * logged in users can edit anything
 * panorama view
 * autodetect panorama  
 * a default image will signal that the original image can't be found and will help prevent trying to show missing images
