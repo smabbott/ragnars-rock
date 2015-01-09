@@ -1,9 +1,10 @@
-Tool for collboratively building a multimedia record of a trip through photos, video and audio.
+=====Ragnar's Rock
+A tool for collboratively building a multimedia record of a trip through photos, video and audio.
 
-WIP
-These are early days
+=====WIP
+These are early days. Very little is in place at this point. 
 
-planned features
+=====Planned Features
 * batch import photos from 
   * facebook
   * google+
