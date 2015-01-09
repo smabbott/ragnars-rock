@@ -1,6 +1,7 @@
-WIP
+Tool for collboratively building a multimedia record of a trip through photos, video and audio.
 
-This app is a tool for collecting photos, videos and sound from multiple sources, and displaying them on a map. The original purpose was to consolodate the collective media captured by a group of friends who had taken a road trip together.
+WIP
+These are early days
 
 planned features
 * batch import photos from 
@@ -9,4 +10,5 @@ planned features
   * instagram
 * embed audio (soundcloud, other?)
 * display panorama images
+* initial map location should be configurable
 ...
