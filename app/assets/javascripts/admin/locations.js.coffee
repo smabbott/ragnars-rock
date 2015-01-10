@@ -4,6 +4,9 @@ $ ->
   gallery = new window.Admin.SortableGallery($('.gallery'))
   photoUploads = {}
 
+  $(".disk-import-trigger").on 'click', ->
+    $(".js-s3_file_field").click()    
+
   $(".js-s3_file_field").each ->
     id = $(this).attr('id')
     $this = -> $("##{id}")
