@@ -72,7 +72,7 @@ $ ->
 
     editModeOn = (e)->
       editMode = true
-      window.map.setOptions({draggableCursor:"url(/assets/icons/new_marker.cur) 8 8, default";})
+      window.map.setOptions({draggableCursor:"url(<%= asset_path('icons/new_marker.cur') %>) 8 8, default";})
 
     editModeOff = (e)->
       editMode = false
