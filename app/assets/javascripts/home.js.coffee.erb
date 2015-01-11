@@ -26,7 +26,7 @@ initialize = ()->
     # Add locations to it
     for location in window.locations
       marker = new google.maps.Marker
-        icon: <%= asset_path("/icons/marker.png") %>
+        icon: "<%= asset_path("icons/marker.png") %>"
         position: new google.maps.LatLng(parseFloat(location.coordinates[0]), parseFloat(location.coordinates[1]))
         map: window.map
         title: location.name
