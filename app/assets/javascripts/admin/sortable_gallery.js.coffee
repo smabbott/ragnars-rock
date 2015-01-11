@@ -1,5 +1,6 @@
 window.Admin or= {}
 
+# TODO: maybe extend a shared base with album browser
 window.Admin.SortableGallery = class SortableGallery
 
   constructor:(@el)->

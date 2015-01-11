@@ -79,6 +79,7 @@
           %span{aria:{hidden:"true"}}&times;
         %h4.modal-title Modal title
       .modal-body
+        %ul.albums.list-inline
       .modal-footer
         %button.btn.btn-default{type:"button", data:{dismiss:"modal"}} cancel
 
@@ -87,8 +88,6 @@
 
 :javascript
   
-  window.fbAT = null;
-
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '#{ENV["FB_APP_ID"]}',

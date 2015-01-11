@@ -24,7 +24,9 @@
 
 //= require admin/selectable
 //= require admin/photo
+//= require admin/album
 //= require admin/sortable_gallery
+//= require admin/album_browser
 //= require admin/locations
 //= require application
 //= require home

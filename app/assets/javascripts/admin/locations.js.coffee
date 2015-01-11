@@ -55,14 +55,28 @@ $ ->
   $('.facebook-import-trigger').on 'click', ->
     window.fbLogin ->
       FB.api '/me/albums', (res)->
+        albumBrowser = new window.Admin.AlbumBrowser($('#album-browser'))
         # create a modal with thumbs of album covers and names.
         # build clickable album objects
+        # $('#album-browser .modal-body').empty()
+        # $('#album-browser').modal('show')
+        # TODO: show a spinner
 
-        # albums = res.data.map (a)->
-        #   a.name
+        # batch-fetch image paths to all of the album cover images
+        albumNames = {}
+        (albumNames[a.cover_photo] = a.name) for a in res.data
+        albumRequests = []
+        albumRequests.push({method: 'GET', relative_url:album.cover_photo}) for album in res.data
+        FB.api '/', 'POST', {batch: albumRequests}, (albumCovers)->
+          covers = []
+          covers.push(JSON.parse(cover.body)) for cover in albumCovers
+          albums = []
+          # albums.push(new window.Admin.Album($("<li><figure><img src='#{album.picture}'/></figure><figcaption>#{albumNames[album.id]}</figcaption>"))) for album in covers
+          albums.push(new window.Admin.Album(album.picture, albumNames[album.id])) for album in covers
+          albumBrowser.setAlbums(albums)
+          albumBrowser.show()
+          # $('#album-browser .modal-body').append(al.el) for al in albums
 
-        $('#album-browser .modal-body').empty().append(albums.join(', '))
-        $('#album-browser').modal('show')
           
-        console.log res
+
 

@@ -1,5 +1,7 @@
-.photo{
+.photo, .album{
+  vertical-align: top;
   position:relative;
+  margin-bottom: 1em;
   &.selected{
     &:before{
       position: absolute;
@@ -47,6 +49,15 @@
     position:relative;
     width:100%;
     height:100%;
+  }
+}
+
+.album.thumb{
+  height:auto;
+  .image-dummy{
+    background-position:center center;
+    width:100px;
+    height:100px;
   }
 }
 
