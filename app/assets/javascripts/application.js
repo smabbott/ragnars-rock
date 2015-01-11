@@ -22,4 +22,9 @@
 //= require bootstrap/transition
 //= require bootstrap/modal
 
-//= require_tree .
+//= require admin/selectable
+//= require admin/photo
+//= require admin/sortable_gallery
+//= require admin/locations
+//= require application
+//= require home
