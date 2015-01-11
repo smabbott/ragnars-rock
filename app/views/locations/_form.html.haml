@@ -63,7 +63,7 @@
           %input{type:"hidden", name:'photo_ids[]', value: photo.id}
 
 
-  = form_for @location, html: {class: 'hidden'} do |f|
+  = form_for @location do |f|
     = f.s3_file_field :photos, :class => 'js-s3_file_field', multiple: true #, :key => "/uploads/${timestamp}/${filename}"
     / .progress
     / .meter{ :style => "width: 0%" }
