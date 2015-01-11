@@ -11,6 +11,8 @@
     = f.label :coordinates
     %br/
     %p= @location.coordinates
+    %input{type:'hidden', name:'coordinates[]', value:@location.coordinates[0]} 
+    %input{type:'hidden', name:'coordinates[]', value:@location.coordinates[1]} 
   .field
     = f.label :name
     %br/
