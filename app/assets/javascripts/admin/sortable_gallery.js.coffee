@@ -1,6 +1,7 @@
 window.Admin or= {}
 
 # TODO: maybe extend a shared base with album browser
+# Maybe sortable gallery inherits from gallery
 window.Admin.SortableGallery = class SortableGallery
 
   constructor:(@el)->

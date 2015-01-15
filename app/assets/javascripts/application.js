@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require jquery-ui.min
 //= require s3_file_field
+//= require mustache.min
 
 // Custom bootstrap includes
 //= require bootstrap/button

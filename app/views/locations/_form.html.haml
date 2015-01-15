@@ -76,12 +76,19 @@
     .modal-content
       .modal-header
         %button.close{type:"button", data:{dismiss:"modal"}, aria:{label:"Close"}}
-          %span{aria:{hidden:"true"}}&times;
+          %span{aria:{hidden:"true"}}
+            &times;
         %h4.modal-title Modal title
       .modal-body
         %ul.albums.list-inline
+        %ul.album-photos.list-inline
       .modal-footer
         %button.btn.btn-default{type:"button", data:{dismiss:"modal"}} cancel
+
+%script#photo-template{type:'x-tmpl-mustache'}
+  %li.photo.thumb{data:{id:"{{id}}"}}
+    .image-dummy{style:"background-image:url({{{source}}});"}
+    %input{type:"hidden", name:'photo_ids[]', value:"{{id}}"}
 
 
 -# TODO: move to locations.js.coffee

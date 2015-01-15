@@ -49,13 +49,15 @@
     position:relative;
     width:100%;
     height:100%;
+    background-position:center center;
+    background-size:cover;
+    background-repeat:no-repeat;
   }
 }
 
 .album.thumb{
   height:auto;
   .image-dummy{
-    background-position:center center;
     width:100px;
     height:100px;
   }
