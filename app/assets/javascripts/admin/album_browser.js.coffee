@@ -10,7 +10,7 @@ window.Admin.AlbumBrowser = class AlbumBrowser
     @el.find('.modal-body').append(@flash)
     @photoTemplate = $("#photo-template").html()
     Mustache.parse(@photoTemplate)
-    # back link
+    @backLink = @el.find('.modal-header .back')
     # parent album
     # get image set
     
@@ -32,6 +32,11 @@ window.Admin.AlbumBrowser = class AlbumBrowser
 
     @albumPhotosList.on 'click', '.photo', ->
       $(this).trigger('select')
+
+    # Nav
+    @backLink.on 'click', ->
+      self.albumPhotosList.hide()
+      self.albumsList.show()
 
   getAlbum:(id)->
     id = id.toString()

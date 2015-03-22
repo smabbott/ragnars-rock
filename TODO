@@ -8,3 +8,4 @@
 * panorama view
 * autodetect panorama  
 * a default image will signal that the original image can't be found and will help prevent trying to show missing images
+* Consider using Filepicker for uploading/linking image files.
