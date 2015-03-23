@@ -80,6 +80,12 @@
             &times;
         %h4.modal-title Modal title
         %a.back back
+        %p 
+          Select
+          %a.select-all All
+          |
+          %a.select-none None
+        %button.btn.btn-primary.import-selected Import Selected
       .modal-body
         %ul.albums.list-inline
         %ul.album-photos.list-inline
@@ -96,6 +102,8 @@
 
 :javascript
   
+  window.Admin.locationId = '#{@location.id}'
+  
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '#{ENV["FB_APP_ID"]}',
@@ -106,11 +114,14 @@
   };
 
   window.fbLogin = function(cb){
+    console.log('check facebook logged in status')
     FB.getLoginStatus(function(res) {
       if (res.status === 'connected') {
+        console.log('logged in, proceed.')
         cb();
       }
       else {
+        console.log('not logged in, authenticate')
         FB.login(function(res){
           if(res.authResponse){
             cb();

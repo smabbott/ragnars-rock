@@ -58,6 +58,7 @@ $ ->
 
   $('.facebook-import-trigger').on 'click', ->
     window.fbLogin ->
+
       FB.api '/me/albums', (res)->
         albumBrowser.show()
         albumBrowser.standby('connecting to facebook...')

@@ -5,12 +5,15 @@ window.Admin.AlbumBrowser = class AlbumBrowser
     @albums = []
     @albumList = @el.find('.modal-body ul.albums')
     @albumPhotosList = @el.find('.modal-body ul.album-photos')
-    @applyHandlers()
+    @backLink = @el.find('.modal-header .back')
+    @selectAll = @el.find('.modal-header .select-all')
+    @selectNone = @el.find('.modal-header .select-none')
+    @importSelected = @el.find('.modal-header .import-selected')
     @flash = $('<p class="flash"></p>')
     @el.find('.modal-body').append(@flash)
     @photoTemplate = $("#photo-template").html()
     Mustache.parse(@photoTemplate)
-    @backLink = @el.find('.modal-header .back')
+    @applyHandlers()
     # parent album
     # get image set
     
@@ -34,9 +37,52 @@ window.Admin.AlbumBrowser = class AlbumBrowser
       $(this).trigger('select')
 
     # Nav
-    @backLink.on 'click', ->
+    @backLink.on 'click', (e)->
+      e.preventDefault()
       self.albumPhotosList.hide()
-      self.albumsList.show()
+      self.albumList.show()
+
+    # SElection
+    @selectAll.on 'click', (e)->
+      e.preventDefault()
+      self.albumPhotosList.find('li').addClass('selected')
+
+    @selectNone.on 'click', (e)->
+      e.preventDefault()
+      self.albumPhotosList.find('li').removeClass('selected')
+
+    @importSelected.on 'click', (e)->
+      e.preventDefault()
+      selected = self.albumPhotosList.find('li.selected input[name="photo_ids[]"]')
+      console.log  selected
+
+      # how can this be made asyc and in the background
+      # make callbacks into named functions
+      # TODO: initiate import
+      # can something like s3_direct_upload be used for this? 
+      # I bet it can. 
+      # Use pusher to update user on progress
+
+      # 1. fetch each photo (JSON) from FB
+      selected.each (index, input)->
+        FB.api "/#{$(input).val()}", 'GET', (res)->
+          # 2. for each photo loop through it's images array
+          maxIndex = 0
+          currentMax = 0
+          i = 0 
+          for image in res.images 
+            do (image)->
+              if image.width > currentMax
+                maxInex = i
+                currentMax = image.width
+              i++
+          # 3. find the image with the largest width
+          maxSource = res.images[maxIndex].source
+          # 4. use the source property of that image to upload to the server
+          $.post '/photos/', {photo:{location_id:window.Admin.locationId, remote_photo_url:maxSource}}, (res)->
+            console.log res
+
+
 
   getAlbum:(id)->
     id = id.toString()
@@ -52,7 +98,6 @@ window.Admin.AlbumBrowser = class AlbumBrowser
     @albumPhotosList.append(album.photos.map (photo)->
       photo.el
     )
-    debugger
     @albumList.hide()
     @albumPhotosList.show()
 
